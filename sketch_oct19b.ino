@@ -13,6 +13,7 @@ byte payload1[3];
 
 void setup()
 {
+  pinMode(8,INPUT);
   Serial.begin(9600);
   #ifdef DYIRDAIKIN_SOFT_IR
   irdaikin.begin(3);
@@ -32,6 +33,9 @@ void setup()
 void loop() {
   while (Serial.available() > 0) {
 
+   
+    if(digitalRead(8))
+    {
     Serial.readBytes(payload1, 2);
 
     temp1 = payload1[1];
@@ -55,6 +59,7 @@ void loop() {
     irdaikin.setFan(fan1);
     irdaikin.setTemp(temp1);
     irdaikin.sendCommand();
+  }
   }
   
 }
