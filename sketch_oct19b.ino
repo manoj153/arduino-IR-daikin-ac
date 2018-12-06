@@ -38,6 +38,27 @@ void loop() {
     {
     Serial.readBytes(payload1, 2);
 
+
+if(payload[0] == 0xFA || payload [1] == 0xFB || payload [1] == 0xFC) // fan swithc, speed up, speed down
+    {
+      if(payload[0] == 0xFA)
+      {
+        turnoncellFan();
+      }
+
+      if(payload[0] == 0xFB)
+      {
+        turnspeedUpFan();
+      }
+
+      if(payload[0] == 0xFB)
+      {
+        turnspeedDownFan();
+      }
+      
+    }
+   else
+   {
     temp1 = payload1[1];
     fan1 = payload1[0] & 0xF;
     on1 =  ((payload1[0] >> 4) & 0x01);
@@ -59,7 +80,10 @@ void loop() {
     irdaikin.setFan(fan1);
     irdaikin.setTemp(temp1);
     irdaikin.sendCommand();
+   }
   }
+  
   }
+  
   
 }
