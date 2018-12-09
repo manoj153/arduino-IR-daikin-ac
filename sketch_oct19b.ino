@@ -39,19 +39,19 @@ void loop() {
     Serial.readBytes(payload1, 2);
 
 
-if(payload[0] == 0xFA || payload [1] == 0xFB || payload [1] == 0xFC) // fan swithc, speed up, speed down
+if(payload1[0] == 0xFA || payload1[1] == 0xFB || payload1[1] == 0xFC) // fan swithc, speed up, speed down
     {
-      if(payload[0] == 0xFA)
+      if(payload1[0] == 0xFA)
       {
         turnoncellFan();
       }
 
-      if(payload[0] == 0xFB)
+      if(payload1[0] == 0xFB)
       {
         turnspeedUpFan();
       }
 
-      if(payload[0] == 0xFB)
+      if(payload1[0] == 0xFB)
       {
         turnspeedDownFan();
       }
@@ -86,4 +86,54 @@ if(payload[0] == 0xFA || payload [1] == 0xFB || payload [1] == 0xFC) // fan swit
   }
   
   
+}
+
+void turnoncellFan() // write directly the mark and spaces of the signal 
+{
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+}
+
+
+void turnspeedUpFan()
+ {
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+ }
+ 
+
+void turnspeedDownFan()
+{
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, LOW);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
+  digitalWrite(3, HIGH);
+  delay(13);
 }
